@@ -25,12 +25,13 @@ SECRET_KEY = '-p_4my=v1h&twc@h=3xtv$)3eag(!-1y-2gghvij&6dolh)-$+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mfcentos.from.sh']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'clamavdb.apps.ClamavdbConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,8 +76,10 @@ WSGI_APPLICATION = 'signatory.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': '/root/repos/signatory/signatory/my.cnf',
+        }
     }
 }
 
@@ -118,3 +121,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_ROOT = '/root/repos/signatory/static/'
