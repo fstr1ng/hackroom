@@ -1,1 +1,2 @@
-signatory/settings.py
+signatory/my.cnf
+signatory/__pycache__/
