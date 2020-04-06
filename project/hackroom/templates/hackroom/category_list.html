@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Categories</h2>
+    <ul>
+        {% for category in categories_list %}
+            <li>
+                {{ category.name }}<br>
+                {{ category.description }}<br>
+                {{ category.policy_set.count }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,9 +1,9 @@
-<p>Amount of categories: <a href="{% url '' %}">{{ amount_of_categories }}</a></p>
+<p>Amount of categories: {{ amount_of_categories }}</a></p>
 {% if latest_policies_list %}
 <p>Latest policies:</p>
 	<ul>
 	{% for policy in latest_policies_list %}
-	<li><a href="{% url 'hackroom:detail' policy.id %}">{{ policy.name }}</a></li>
+	<li><a href="{% url 'hackroom:policy_show' policy.id %}">{{ policy.name }}</a></li>
 	{% endfor %}
 	</ul>
 {% else %}

@@ -27,9 +27,12 @@ class Policy(models.Model):
         choices = Types.choices,
         default = Types.SIGNATURE
     )
-
-    def __str__(self):
+    
+    @property
+    def full_name(self):
         return f'{self.type}.{self.issue}.{self.name}'
+    def __str__(self):
+        return self.full_name
 
 class File(models.Model):
     class Types(models.TextChoices):
@@ -44,6 +47,7 @@ class Signature(models.Model):
         Policy,
         on_delete=models.CASCADE,
         limit_choices_to={'type': 'SIG'},
+        null=True,
         blank=True)
     options = models.ManyToManyField('Option')
     subsigns = models.ManyToManyField('SubSign')
