@@ -1,0 +1,46 @@
+import enums
+
+test_data = {
+    "category": [
+        {"name": "Shells",
+         "description": "Web-shells, uploaders, file managers",
+        },
+        {"name": "Redirects",
+         "description": "Redirection scripts or functions",
+        },
+        {"name": "CMS vulnerability",
+         "description": "Malware targeted on CMS security issues",
+        },
+    ],
+    "policy": [
+        {"name": "gvvno.php",
+         "type": enums.PolicyType.sign,
+         "issue": 23,
+        },
+        {"name": "abracadabra.php",
+         "type": enums.PolicyType.sign,
+        },
+        {"name": "wordpress",
+         "type": enums.PolicyType.cgroup,
+        },
+        {"name": "adminer.php",
+         "type": enums.PolicyType.wlist,
+        },
+    ],
+    "option": [
+        {"key": enums.SignatureKeys.engine,
+         "value": "81-255",
+        },
+        {"key": enums.SignatureKeys.target,
+         "value": "0",
+        },
+    ],
+    "subsign": [
+        {"type": enums.SubSignType.hex,
+         "value": "3c3f706870",
+        },
+        {"type": enums.SubSignType.regexp,
+         "value": "0/hacker_shell/",
+        },
+    ],
+}
