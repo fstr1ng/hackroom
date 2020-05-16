@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block page_title %}Политика: {{ action }}{% endblock %}
+
+{% block content %}
+<form method=POST>
+    {% csrf_token %}
+    <div class="field is-grouped">
+        <div class="control">
+        {% render_field form.issue class="input" placeholder="Номер задачи" %}
+        </div>
+
+        <div class="control">
+            <div class="select">
+            {% render_field form.type class="select" %}
+            <p class="help">Тип политики</p>
+            </div>
+        </div>
+    
+        <div class="control">
+        {% render_field form.name class="input" placeholder="Название" %}
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="control">
+            <label class="label">Категории</label>
+            <div class="select is-multiple">
+            {% render_field form.categories class="select" size="8" %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="field is-grouped">
+        <div class="control">
+        <label class="label">Описание</label>
+        {% render_field form.description|remove_attr:"rows"|remove_attr:"cols" class="textarea has-fixed-size" placeholder="Описание политики" %}
+        </div>
+    
+        <div class="control">
+        <label class="label">Экземпляр</label>
+        {% render_field form.example|remove_attr:"rows"|remove_attr:"cols" class="textarea has-fixed-size is-family-monospace" placeholder="Пример вредоносного кода" %}
+        </div>
+    </div>
+    
+    <div id="id_signature" class="field">
+        <label class="label">Сигнатура</label>
+        <div class="control">
+        {% render_field form.signature %}
+        </div>
+    </div>
+    
+    <div id="id_files" class="field">
+        <label class="label">Файлы</label>
+        <div class="control">
+            <select name="file">
+                <option value="i45123" selected>Файл</option>
+        </select>
+        </div>
+    </div>
+    
+    <div class="field">
+        <label class="label">Включена?</label>
+        <div class="control">
+        {% render_field form.active %}
+        </div>
+    </div>
+    <div class="control">
+        <button class="button is-link">Сохранить</button>
+    </div>
+</form>
+
+<script>
+
+
+var typeSelectTag = jQuery('#id_type');
+var signSelectTag = jQuery('select#id_signature');
+var signatureTags = jQuery('#id_signature');
+var current_value = signSelectTag.val();
+
+function checkSignature() {
+    var selectedType = typeSelectTag.children("option:selected").val();
+    if (selectedType == 'sgn') {
+        signatureTags.css("display", "inherit");
+        signSelectTag.val(current_value);
+        } 
+    else {
+        signatureTags.css("display", "none");
+        signSelectTag.val("");
+    }
+}
+
+jQuery(checkSignature);
+typeSelectTag.change(checkSignature);
+
+</script>
+
+{% endblock %}

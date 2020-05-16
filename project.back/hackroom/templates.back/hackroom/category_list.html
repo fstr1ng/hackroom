@@ -1,0 +1,39 @@
+{% extends "hackroom/object_list.html" %}
+
+{% block page_title %}Категории{% endblock %}
+
+{% block buttons %}
+<a class="button is-link is-outlined" href="{% url 'hackroom:category_create' %}">Добавить</a>
+{%endblock%}
+
+{% block table_head %}
+<tr>
+	<th>ID</th>
+	<th>Name</th>
+	<th>Descrtiption</th>
+	<th>Policies</th>
+	<th></th>
+</tr>
+{% endblock %}
+
+{% block table_body %}
+{% for category in object_list %}
+<tr>
+	<th>{{ category.id }}</th>
+	<td>{{ category.name }}</td>
+	<td>{{ category.description }}</td>
+	<td>{{ category.policy_set.count }}</td>
+	<td>
+		<div class="field is-grouped">
+			<div class="control">
+                <a class="button is-primary is-outlined is-small" href="{% url 'hackroom:category_update' category.id  %}"><i class="fas fa-cog"></i></a>
+            </div>
+			<div class="control">
+                <a class="button is-danger is-outlined is-small" href="{% url 'hackroom:category_list' %}"><i class="fas fa-trash"></i></a>
+            </div>
+		</div>
+	</td>
+</tr>
+{% endfor %}
+{% endblock %}
+

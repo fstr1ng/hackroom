@@ -1,0 +1,23 @@
+{% extends "hackroom/object_list.html" %}
+
+{% block page_title %}Сигнатуры{% endblock %}
+
+{% block buttons %}
+<a class="button is-link is-outlined" href="{% url 'hackroom:signature_create' %}">Добавить</a>
+{%endblock%}
+
+{% block table_head %}
+<tr>
+    <th>ID</th>
+    <th>Signature</th>
+</tr>
+{% endblock %}
+
+{% block table_body %}
+{% for signature in object_list %}
+<tr>
+    <th>{{ signature.id }}</th>
+    <td>{{ signature }}</td>
+</tr>
+{% endfor %}
+{% endblock %}
