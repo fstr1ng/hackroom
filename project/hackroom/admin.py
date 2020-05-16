@@ -14,9 +14,6 @@ class FileAdmin(admin.ModelAdmin):
 class FileInline(admin.StackedInline):
     model = File
     extra = 1
-class SignatureInline(admin.StackedInline):
-    model = Signature
-    extra = 1
 @admin.register(Policy)
 class PolicyAdmin(admin.ModelAdmin):
     filter_horizontal = ('categories',)
@@ -33,11 +30,14 @@ class PolicyAdmin(admin.ModelAdmin):
         ('Information', {
             'fields': ('categories', 'description', 'example'),
         }),
+        ('Signature', {
+            'fields': ('signature',),
+        }),
         ('Options', {
             'fields': ('active',),
         }),
     )
-    inlines = [FileInline, SignatureInline]
+    inlines = [FileInline]
     list_display = ('__str__', 'type','created_ts', 'updated_ts', 'active')
     list_editable = ('active',)
     list_filter = ('type', 'active', 'categories',)
@@ -45,8 +45,7 @@ class PolicyAdmin(admin.ModelAdmin):
 
 @admin.register(Signature)
 class SignatureAdmin(admin.ModelAdmin):
-    pass#filter_horizontal = ('options','subsigns')
-
+    pass
 
 @admin.register(SubSign)
 class SubSignAdmin(admin.ModelAdmin):

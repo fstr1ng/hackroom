@@ -1,11 +1,18 @@
-from django.urls import path
-from . import views
+from django.urls import include, path
+from rest_framework import routers
+from hackroom import views
 
-app_name = 'hackroom'
+router = routers.DefaultRouter()
+router.register('category', views.CategoryViewSet)
+router.register('policy', views.PolicyViewSet)
+router.register('file', views.FileViewSet)
+router.register('signature', views.SignatureViewSet)
+router.register('subsign', views.SubSignViewSet)
+router.register('option', views.OptionViewSet)
 
 urlpatterns = [
-    path('', views.IndexPage.as_view(), name='index'),
-    path('category/', views.CategoriesList.as_view()),
-    path('policy/add/', views.policy_add, name='policy_add'),
-    path('policy/show/<int:policy_id>', views.policy_show, name='policy_show'),
+    path('', views.IndexView.as_view(), name='index'),
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framefork')),
+    path('category/', views.CategoryListView.as_view(), name='category_list'),
 ]
